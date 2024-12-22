@@ -1,3 +1,5 @@
+#RankPage
+
 This project is part of a group assignment, in which there were two main contributors including myself. The indexer, pagerank and query system/frontend as well as the websever is all my code. The other code (KVS, flame) I had implemented for homeworks thorughout the term, but ended up taking someone else's code for the final implementation.
 
 This is a cloud-based search engine that can also be ran locally. It has multiple parts including a webserver loosely based on the spark web server, a sharded centralised scalable KVS store, a distributed data analytics engine (Flame) that is loosely based on Apache Spark, a fault-tolerant scalable crawler, a parallelised indexer and pagerank implementation, based on the original algorithm. This was interacted with through a frontend query interface, that would rank results based on results from indexing (e.g. tf/idf) and pagerank.
@@ -47,5 +49,4 @@ Finally, run the PageRank
 java -cp bin cis5550.flame.FlameSubmit localhost:9000 pagerank.jar cis5550.jobs.PageRank
 ```
 
-Now, the frontend can be accessed at localhost:3000 which accepts queries and returns results.# RankPage
-# RankPage
+Now, the frontend can be accessed at localhost:3000 which accepts queries and returns results.
