@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Search</title>
+    <style>
+		body {
+		            font-family: Arial, sans-serif;
+		            display: flex;
+					flex-direction: column;
+		            justify-content: center;
+		            align-items: center;
+		            height: 100vh; /* Full viewport height */
+		            margin: 0;
+		            background-color: #f4f4f9;
+		}
+				
+		#searchForm {
+			display: flex; /* Flex layout for horizontal alignment */
+            justify-content: center; /* Center the elements horizontally */
+            align-items: center; /* Align items vertically in the center */
+            width: 100%;
+            max-width: 600px;
+		}
+		
+		h1 {
+		            font-size: 3rem;
+		            margin-bottom: 20px;
+					text-align: center;
+		}
+		
+		input[type="text"] {
+            width: 80%; /* Adjust width so that it doesn't take up the full row */
+            padding: 15px;
+            font-size: 2rem;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            outline: none;
+            transition: border-color 0.3s;
+            margin-right: 10px; /* Add space between the input and the button */
+        }
+        
+        input[type="text"]:focus {
+            border-color: #3498db;
+        }
+
+        input[type="submit"] {
+            padding: 15px 30px;
+            font-size: 2rem;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+       input[type="submit"]:hover {
+           background-color: #2979b8;
+       }
+
+		.loader {
+		            border: 12px solid #f3f3f3;
+		            border-top: 12px solid #3498db;
+		            border-radius: 50%;
+		            width: 100px;
+		            height: 100px;
+		            animation: spin 2s linear infinite;
+		            display: none; /* Initially hidden */
+		            margin: 20px auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+		#results {
+		        margin-top: 20px;
+		        max-height: 60vh; /* Limit the height of results */
+		        overflow-y: auto; /* Allow vertical scrolling */
+		        width: 100%;
+		        max-width: 100vw; /* Same max-width as form */
+		        padding: 0 20px; /* Add horizontal padding */
+		        box-sizing: border-box; /* Ensure padding doesn't affect width */
+	    }
+	
+	    #results h2 {
+	        font-size: 2rem; /* Larger font for the title */
+	        margin-bottom: 20px; /* Add space below the title */
+	    }
+	
+	    #results ul {
+	        list-style-type: none;
+	        padding: 0;
+	    }
+	
+	    #results li {
+	        margin-bottom: 15px; /* Add space between list items */
+	    }
+	
+	    #results a {
+	        font-size: 1.5rem; /* Larger font for links */
+	        text-decoration: none;
+	        color: #3498db;
+	    }
+	
+	    #results a:hover {
+	        text-decoration: underline;
+	        color: #2979b8;
+	    }
+    </style>
+</head>
+<body>
+	<h1>RankPage Search</h1>
+    <form id="searchForm">
+        <input type="text" name="q" placeholder="Enter your query" required />
+		<br />
+        <input type="submit" value="Search" />
+    </form>
+	<div id="loader" class="loader"></div>
+    <div id="results"></div>
+	<script>
+        // JavaScript to handle form submission
+        document.getElementById('searchForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the default form submission
+
+            var query = document.querySelector('input[name="q"]').value;
+			var loader = document.getElementById('loader');
+			
+			var resultsDiv = document.getElementById('results');
+
+            // Clear previous results and show loader
+            resultsDiv.innerHTML = '';
+            loader.style.display = 'block';
+
+            // Create an XMLHttpRequest object
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', '/search?q=' + encodeURIComponent(query), true);
+
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4) {
+					loader.style.display = 'none';
+                    if (xhr.status === 200) {
+                        // Update the results div with the response
+                        document.getElementById('results').innerHTML = xhr.responseText;
+                    } else {
+                        // Handle errors
+                        document.getElementById('results').innerHTML = 'An error occurred: ' + xhr.statusText;
+                    }
+                }
+            };
+
+            xhr.send();
+        });
+    </script>
+</body>
+</html>
