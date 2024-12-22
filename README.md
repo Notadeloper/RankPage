@@ -48,3 +48,4 @@ java -cp bin cis5550.flame.FlameSubmit localhost:9000 pagerank.jar cis5550.jobs.
 ```
 
 Now, the frontend can be accessed at localhost:3000 which accepts queries and returns results.# RankPage
+# RankPage
