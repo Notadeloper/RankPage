@@ -1,4 +1,4 @@
-# RankPage
+# RankPage - a cloud based search engine
 
 This project is part of a group assignment, in which there were two main contributors including myself. The indexer, pagerank and query system/frontend as well as the websever is all my code. The other code (KVS, flame) I had implemented for homeworks thorughout the term, but ended up taking someone else's code for the final implementation.
 
